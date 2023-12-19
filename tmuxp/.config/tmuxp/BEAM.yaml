@@ -1,0 +1,17 @@
+session_name: BEAM
+start_directory: ~/ClearlyEnergy/BEAM
+environment:
+  DJANGO_SETTINGS_MODULE: config.settings.dev
+shell_command_before: "conda activate BEAM_UPDATE"
+windows:
+  - window_name: Django Server
+    panes:
+      - shell_command:
+        - ./bin/start-beam.sh 
+  - window_name: Python Shell
+    panes:
+      - shell_command:
+        - python -i BEAM_init.py 
+  - window_name: Terminal
+    panes:
+      - 
