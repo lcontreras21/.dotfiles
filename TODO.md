@@ -1,0 +1,16 @@
+### TODO
+- Harpoon
+    - On going to menu, save file if switching
+- Telescope
+    - Add keymap to bring up previous picker and search
+    - Add keymap to harpoon selected files instead of opening them
+    - Add keymap to open it in a split
+- Install
+    - Write up install/uninstall script using stow for dotfiles
+    - Add tracking of different cli tools and potential install script
+        - fzf, ripgrep, tmux 3.1, zsh, conda, tmuxp, tmux, tpm
+    - When running install script, after sourcing tmux plugins, move git_status.sh to catpuccin/custom
+- tmux-cheat-sheat
+    - Add more tools and clean up
+- nvim
+    - Style lualine more
