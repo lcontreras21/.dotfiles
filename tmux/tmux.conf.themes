@@ -1,0 +1,7 @@
+set -g @catppuccin_flavour 'macchiato' # or latte (white), frappe (gray), macchiato (dark gray), mocha (black)
+# Set the current and default panes to show their pane names or what's being run
+set -g @catppuccin_window_current_text "#W"
+set -g @catppuccin_window_default_text "#W"
+
+set -g @catppuccin_status_modules_right "git_status session date_time"
+

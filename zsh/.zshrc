@@ -136,7 +136,7 @@ start-celery-f()
 	then
 		cd ~/ClearlyEnergy/BEAM && conda activate BEAM_UPDATE && watchmedo auto-restart --directory="seed/" --pattern="*.py" --recursive -- ./bin/start_celery.sh
 	else
-		conda activate BEAM_UPDATE && watchmedo auto-restart --directory="seed/" --pattern="*.py" --recursive -- ./bin/start_celery.sh
+		conda activate BEAM_UPDATE && watchmedo auto-restart --directory="seed/" --directory="src/" --pattern="*.py" --recursive -- ./bin/start_celery.sh
 	fi
 }
 
@@ -163,3 +163,12 @@ alias vi='/bin/nvim/nvim.appimage'
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go:~/Repos/AdventOfCode/2023
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+# DOTFILES
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# TMUX
+alias tmuxa='tmux attach -t'
+alias tmuxl='tmuxp load'
+alias tmuxk='tmux kill-session -t'
+export DISABLE_AUTO_TITLE='true'

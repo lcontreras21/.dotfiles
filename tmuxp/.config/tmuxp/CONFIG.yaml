@@ -1,0 +1,7 @@
+session_name: CONFIG
+start_directory: ~/.dotfiles/
+windows:
+  - window_name: Term
+    panes:
+      - shell_command:
+        - vim .

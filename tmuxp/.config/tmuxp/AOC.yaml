@@ -3,7 +3,8 @@ start_directory: ~/Repos/AdventOfCode/2023
 windows:
   - window_name: Go
     panes:
-      -
+      - shell_command:
+        - vim .
   - window_name: Run
     panes:
-      -
+      - clear
