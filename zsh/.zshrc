@@ -111,7 +111,6 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/lcontreras/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -127,48 +126,11 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Source everything else
+source ~/.zsh_profile
 
-start-celery-f()
-{
-	export DJANGO_SETTINGS_MODULE=config.settings.dev
-	# If in Work Dir, don't cd, otherwise cd to work dir
-	if [[ pwd != "~/ClearlyEnergy/BEAM" ]];
-	then
-		cd ~/ClearlyEnergy/BEAM && conda activate BEAM_UPDATE && watchmedo auto-restart --directory="seed/" --pattern="*.py" --recursive -- ./bin/start_celery.sh
-	else
-		conda activate BEAM_UPDATE && watchmedo auto-restart --directory="seed/" --directory="src/" --pattern="*.py" --recursive -- ./bin/start_celery.sh
-	fi
-}
-
-alias start-celery=start-celery-f
-
-# Add Redis to PATH
-export PATH=$PATH:'/home/lcontreras/anaconda3/envs/BEAM/lib/python3.6/site-packages/redis_server/bin/'
-
-# TIGER - HERA CS350
-alias compiler-tests='/home/courses/examples/cs350/Tiger-tests/Run-tests.sh'
-alias compiler-test='/home/courses/examples/cs350/Tiger-tests/Run-a-test.sh'
-export PATH=$PATH:'/home/courses/lib/HERA-C/'
-
-# X11 Display Forwarding
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-export LIBGL_ALWAYS_INDIRECT=1
-
-# NEOVIM 
-PATH="$HOME/.local/bin:$PATH"
-alias vim='/bin/nvim/nvim.appimage'
-alias vi='/bin/nvim/nvim.appimage'
-
-# GOLANG
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go:~/Repos/AdventOfCode/2023
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-# DOTFILES
-export XDG_CONFIG_HOME="$HOME/.config"
-
-# TMUX
-alias tmuxa='tmux attach -t'
-alias tmuxl='tmuxp load'
-alias tmuxk='tmux kill-session -t'
-export DISABLE_AUTO_TITLE='true'
+# psql_status=$(service postgresql status)
+# if [[ $psql_status = *" down"* ]] && [[ $(date +%u) -lt 6 ]]; then
+#   echo "Starting PSQL"
+#   sudo service postgresql --full-restart
+# fi

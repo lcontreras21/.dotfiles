@@ -8,11 +8,7 @@ windows:
     panes:
       - shell_command:
         - ./bin/start-ashp.sh 
-  - window_name: Python Shell
-    panes:
-      - shell_command:
-        - clear -x
-        - python -i ASHP_init.py 
   - window_name: Terminal
     panes:
-      - clear -x
+      - shell_command:
+        - vim .

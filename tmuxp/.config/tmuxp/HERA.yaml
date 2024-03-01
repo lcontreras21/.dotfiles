@@ -1,0 +1,7 @@
+session_name: HERA
+start_directory: ~/Repos/Haverford-CS-Projects/cs350-home
+windows:
+  - window_name: Terminal
+    panes:
+      - shell_command:
+        - vim .

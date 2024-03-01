@@ -5,6 +5,3 @@ windows:
     panes:
       - shell_command:
         - vim .
-  - window_name: Run
-    panes:
-      - clear

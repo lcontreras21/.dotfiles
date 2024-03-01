@@ -4,15 +4,11 @@ environment:
   DJANGO_SETTINGS_MODULE: config.settings.dev
 shell_command_before: "conda activate BEAM_UPDATE"
 windows:
-  - window_name: Django Server
+  - window_name: Django
     panes:
       - shell_command:
         - ./bin/start-beam.sh 
-  - window_name: Python Shell
+  - window_name: BEAM
     panes:
       - shell_command:
-        - clear -x
-        - python -i BEAM_init.py 
-  - window_name: Terminal
-    panes:
-      - clear-x
+        - vim .
