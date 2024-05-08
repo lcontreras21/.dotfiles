@@ -3,4 +3,5 @@ start_directory: ~/ClearlyEnergy/helix-aws-config
 windows:
   - window_name: Terminal
     panes:
-      - clear -x
+      - shell_command:
+        - vim .
