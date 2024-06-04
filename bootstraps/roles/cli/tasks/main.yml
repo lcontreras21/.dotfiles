@@ -1,0 +1,50 @@
+---
+- name: Create directory ~/.local/bin/
+  file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    mode: 0755
+
+- name: Install CLI tools in Pop!_OS
+  become: true
+  apt:
+    name:
+      - tmux
+      - ripgrep
+      - fd-find
+      - jq
+      - htop
+      - python3-pip
+      - unzip
+      - xclip
+      - moreutils
+      - fzf
+      - zoxide
+      - zsh
+      - npm
+    state: present
+  when: ansible_distribution == "Pop!_OS"
+
+- name: Remove default .zshrc
+  file:
+    path: "{{ home }}/.zshrc"
+    state: absent
+
+- name: Download Oh My Zsh installation script
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install_ohmyzsh.sh
+
+- name: Run Oh My Zsh installation script
+  command: sh /tmp/install_ohmyzsh.sh --unattended
+  register: ohmyzsh_result
+  failed_when: "'FAILED' in ohmyzsh_result.stderr"
+
+- name: Install powerlevel10k in Pop!_OS
+  git:
+    repo: 'https://github.com/romkatv/powerlevel10k.git'
+    dest: '{{ home }}/.oh-my-zsh/custom/themes/powerlevel10k'
+    depth: 1
+
+- name: Install golang
+  import_tasks: golang.yml

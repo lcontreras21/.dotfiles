@@ -1,0 +1,38 @@
+---
+- name: Install stow in Pop!_OS
+  import_tasks: pop_os.yml
+  when: ansible_distribution == "Pop!_OS"
+
+- name: Remove files that will conflict with Stow
+  loop:
+    - .zshrc
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: absent
+
+- name: Delete Previous stowed folders
+  loop:
+    - bin
+    - nvim
+    - tmux
+    - tmuxp
+    - zsh
+  args:
+    chdir: "/home/lcontreras21/.dotfiles_test/configs"
+  shell: "stow -D {{ item }} -t {{ home }} --verbose=2"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'
+
+- name: Run stow
+  become_user: "{{ username }}"
+  loop:
+    - bin
+    - nvim
+    - tmux
+    - tmuxp
+    - zsh
+  args:
+    chdir: "/home/lcontreras21/.dotfiles_test/configs"
+  shell: "stow {{ item }} -t {{ home }} --verbose=2"
+  register: result
+  changed_when: 'result.stderr is search("LINK: ")'

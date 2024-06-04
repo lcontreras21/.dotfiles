@@ -1,16 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-STOW_FOLDERS="bin,nvim,tmux,tmuxp,zsh"
+set -e
 
-pushd $DOTFILES
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-do
-    echo "stow $folder"
+pip3 install ansible
 
-    # first unstow the folder to clean up
-    stow --delete $folder --target=$HOME
+export PATH="$PATH:~/.local/bin"
+ansible-galaxy install -r requirements.yml
 
-    # then re-symlink it
-    stow $folder --target=$HOME
-done
-popd
+ansible-playbook bootstraps/bootstrap.yml --ask-become-pass

@@ -1,0 +1,53 @@
+---
+# TODO: install node, golang
+- name: Bootstrap development environment
+  hosts: localhost
+  become: no
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: user.name for git config
+      become_user: "{{ username }}"
+      community.general.git_config:
+        name: user.name
+        scope: global
+        value: "{{ username }}"
+
+    - name: user.email for git config
+      become_user: "{{ username }}"
+      community.general.git_config:
+        name: user.email
+        scope: global
+        value: "{{ email }}"
+
+    - name: Silence all safe.directory warnings
+      become_user: "{{ username }}"
+      community.general.git_config:
+        # git config --global --add safe.directory '*'
+        name: safe.directory
+        scope: global
+        value: "*"
+
+    - name: Command-line
+      tags: cli
+      import_role:
+        name: cli
+
+    - name: Stow
+      tags: stow
+      import_role:
+        name: stow
+
+    - name: Neovim
+      tags: nvim
+      import_role:
+        name: nvim
+
+    - name: Desktop
+      tags: desktop 
+      import_role:
+        name: desktops
+      when: >
+        (not 'CI' in ansible_env) and
+        (ansible_system is search("Linux")) and
+        (not ansible_kernel is search("microsoft"))

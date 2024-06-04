@@ -1,0 +1,8 @@
+---
+- name: Install Stow in Pop!_OS 
+  become_method: sudo
+  become: true
+  apt:
+    name:
+      - stow
+    state: present
