@@ -10,4 +10,5 @@ pip3 install ansible
 export PATH="$PATH:~/.local/bin"
 ansible-galaxy install -r bootstraps/requirements.yml
 
-ansible-playbook bootstraps/bootstrap.yml --ask-become-pass
+# ansible-playbook bootstraps/bootstrap.yml --ask-become-pass
+ansible-playbook bootstraps/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras21"
