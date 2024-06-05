@@ -1,2 +1,2 @@
 #!/bin/bash
-docker compose -f bootstraps/docker-compose.yml up --build -d
+sudo docker compose -f bootstraps/docker-compose.yml up --build -d dotfiles-indirect

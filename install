@@ -1,10 +1,13 @@
 #!/bin/bash
 
 set -e
+cd 
+FOLDER="test.dotfiles"
+cd ${FOLDER}
 
 pip3 install ansible
 
 export PATH="$PATH:~/.local/bin"
-ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r bootstraps/requirements.yml
 
 ansible-playbook bootstraps/bootstrap.yml --ask-become-pass

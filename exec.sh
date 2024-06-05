@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo docker exec -it dotfiles zsh
+sudo docker exec -it dotfiles-indirect zsh
