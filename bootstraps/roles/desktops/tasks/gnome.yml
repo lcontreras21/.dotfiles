@@ -12,7 +12,7 @@
     name:
       - dconf-cli
     state: present
-  when: ansible_distribution == "Pop!_OS" || ansible_distribution == 'Ubuntu'
+  when: ansible_distribution == "Pop!_OS" || ansible_distribution == "Ubuntu"
 
 - name: Show battery percentage
   become: true

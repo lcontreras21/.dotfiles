@@ -12,4 +12,5 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
+echo $selected
 sudo docker compose -f bootstraps/docker-compose.yml up --build -d $selected 

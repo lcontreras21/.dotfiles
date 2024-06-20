@@ -3,7 +3,7 @@ services:
     build:
       context: ../
       dockerfile: bootstraps/pop_os.direct.Dockerfile
-    container_name: dotfiles-direct
+    container_name: pop_os-dotfiles-direct
     user: lcontreras21
     tty: true
     entrypoint: /bin/zsh
@@ -13,7 +13,7 @@ services:
     build:
       context: ../
       dockerfile: bootstraps/pop_os.indirect.Dockerfile
-    container_name: dotfiles-indirect
+    container_name: pop_os-dotfiles-indirect
     user: lcontreras21
     tty: true
     entrypoint: /bin/bash
@@ -23,7 +23,7 @@ services:
     build:
       context: ../
       dockerfile: bootstraps/ubuntu.indirect.Dockerfile
-    container_name: dotfiles-indirect
+    container_name: ubuntu-dotfiles-indirect
     user: lcontreras21
     tty: true
     entrypoint: /bin/bash
