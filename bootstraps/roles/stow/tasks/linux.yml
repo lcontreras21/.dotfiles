@@ -1,5 +1,5 @@
 ---
-- name: Install Stow in Pop!_OS 
+- name: Install Stow in Debian-based distros 
   become_method: sudo
   become: true
   apt:

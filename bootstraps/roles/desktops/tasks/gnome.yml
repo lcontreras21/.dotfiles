@@ -6,13 +6,13 @@
       - psutil
     state: present
 
-- name: Install dconf in Pop!_OS
+- name: Install dconf in Debian-based distros 
   become: true
   apt:
     name:
       - dconf-cli
     state: present
-  when: ansible_distribution == "Pop!_OS"
+  when: ansible_distribution == "Pop!_OS" || ansible_distribution == 'Ubuntu'
 
 - name: Show battery percentage
   become: true

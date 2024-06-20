@@ -1,4 +1,4 @@
 ---
 - name: Install nvim in Linux
   import_tasks: linux.yml
-  when: ansible_distribution == "Pop!_OS"
+  when: ansible_distribution == "Pop!_OS" || ansible_distribution == 'Ubuntu'

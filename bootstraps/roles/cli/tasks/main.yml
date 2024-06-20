@@ -5,7 +5,7 @@
     state: directory
     mode: 0755
 
-- name: Install CLI tools in Pop!_OS
+- name: Install CLI tools in Debian-based distros
   become: true
   apt:
     name:
@@ -23,7 +23,10 @@
       - zsh
       - npm
     state: present
-  when: ansible_distribution == "Pop!_OS"
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+  when: ansible_distribution == "Pop!_OS" || ansible_distribution == 'Ubuntu'
 
 - name: Remove default .zshrc
   file:
@@ -40,7 +43,7 @@
   register: ohmyzsh_result
   failed_when: "'FAILED' in ohmyzsh_result.stderr"
 
-- name: Install powerlevel10k in Pop!_OS
+- name: Install powerlevel10k in Debian-based distros 
   git:
     repo: 'https://github.com/romkatv/powerlevel10k.git'
     dest: '{{ home }}/.oh-my-zsh/custom/themes/powerlevel10k'

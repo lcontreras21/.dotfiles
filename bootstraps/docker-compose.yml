@@ -1,5 +1,5 @@
 services:
-  dotfiles-direct:
+  pop_os-dotfiles-direct:
     build:
       context: ../
       dockerfile: bootstraps/pop_os.direct.Dockerfile
@@ -9,10 +9,20 @@ services:
     entrypoint: /bin/zsh
     environment:
       - TERM=xterm-256color
-  dotfiles-indirect:
+  pop_os-dotfiles-indirect:
     build:
       context: ../
       dockerfile: bootstraps/pop_os.indirect.Dockerfile
+    container_name: dotfiles-indirect
+    user: lcontreras21
+    tty: true
+    entrypoint: /bin/bash
+    environment:
+      - TERM=xterm-256color
+  ubuntu-dotfiles-indirect:
+    build:
+      context: ../
+      dockerfile: bootstraps/ubuntu.indirect.Dockerfile
     container_name: dotfiles-indirect
     user: lcontreras21
     tty: true
