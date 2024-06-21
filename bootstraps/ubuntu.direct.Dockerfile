@@ -15,8 +15,11 @@ RUN echo 'lcontreras21:lcontreras21' | chpasswd
 
 USER lcontreras21
 
-COPY . /home/lcontreras21/.dotfiles_test
-WORKDIR /home/lcontreras21/.dotfiles_test
+ENV DOTFILES "/home/lcontreras21/.dotfiles" 
+
+COPY . /home/lcontreras21/.dotfiles
+WORKDIR /home/lcontreras21/.dotfiles
+
 
 RUN ansible-galaxy install -r bootstraps/requirements.yml
 

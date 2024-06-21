@@ -24,7 +24,7 @@ COPY bootstrap.sh bootstrap.sh
 RUN ./bootstrap.sh
 
 # FOR DEBUGGING:
-# COPY . /home/lcontreras21/.dotfiles_test
-# WORKDIR  /home/lcontreras21/.dotfiles_test
+# COPY . /home/lcontreras21/.dotfiles
+# WORKDIR  /home/lcontreras21/.dotfiles
 
 # RUN ./install

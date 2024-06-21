@@ -18,7 +18,7 @@
     - tmuxp
     - zsh
   args:
-    chdir: "/home/lcontreras21/.dotfiles_test/configs"
+    chdir: "/home/lcontreras21/.dotfiles/configs"
   shell: "stow -D {{ item }} -t {{ home }} --verbose=2"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
@@ -32,7 +32,7 @@
     - tmuxp
     - zsh
   args:
-    chdir: "/home/lcontreras21/.dotfiles_test/configs"
+    chdir: "{{ dotfiles }}/configs"
   shell: "stow {{ item }} -t {{ home }} --verbose=2"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'
