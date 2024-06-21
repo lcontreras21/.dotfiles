@@ -16,7 +16,18 @@ services:
     container_name: pop_os-dotfiles-indirect
     user: lcontreras21
     tty: true
-    entrypoint: /bin/bash
+    entrypoint: /bin/zsh
+    environment:
+      - TERM=xterm-256color
+
+  ubuntu-dotfiles-direct:
+    build:
+      context: ../
+      dockerfile: bootstraps/ubuntu.direct.Dockerfile
+    container_name: ubuntu-dotfiles-direct
+    user: lcontreras21
+    tty: true
+    entrypoint: /bin/zsh
     environment:
       - TERM=xterm-256color
   ubuntu-dotfiles-indirect:
@@ -26,6 +37,6 @@ services:
     container_name: ubuntu-dotfiles-indirect
     user: lcontreras21
     tty: true
-    entrypoint: /bin/bash
+    entrypoint: /bin/zsh
     environment:
       - TERM=xterm-256color

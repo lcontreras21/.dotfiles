@@ -1,6 +1,6 @@
 #!/bin/bash
 
-choices=`echo "pop_os-dotfiles-direct pop_os-dotfiles-indirect ubuntu-dotfiles-indirect" | tr ' ' '\n'`
+choices=`echo "pop_os-dotfiles-direct pop_os-dotfiles-indirect ubuntu-dotfiles-indirect ubuntu-dotfiles-direct" | tr ' ' '\n'`
 
 if [[ $# -eq 1 ]]; then
     selected=$1

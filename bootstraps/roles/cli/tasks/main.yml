@@ -23,10 +23,10 @@
       - zsh
       - npm
     state: present
-    upgrade: yes
-    update_cache: yes
-    cache_valid_time: 86400 #One day
-  when: ansible_distribution == "Pop!_OS" || ansible_distribution == 'Ubuntu'
+    # upgrade: yes
+    # update_cache: yes
+    # cache_valid_time: 86400 #One day
+  when: ansible_distribution == "Pop!_OS" or ansible_distribution == "Ubuntu"
 
 - name: Remove default .zshrc
   file:
