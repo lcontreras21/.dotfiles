@@ -4,6 +4,7 @@ cd $HOME
 FOLDER=".dotfiles"
 REPO="https://github.com/lcontreras21/.dotfiles.git"
 
+# TODO: remove branch arg when merged in
 git clone -b ansible-izing --recurse-submodules ${REPO} ${FOLDER}
 cd ${FOLDER}
 
