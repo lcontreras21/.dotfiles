@@ -8,7 +8,7 @@ git clone -b ansible-izing --recurse-submodules ${REPO} ${FOLDER}
 cd ${FOLDER}
 
 set -e
-export PATH=$PATH:.local/bin
+export PATH="$PATH:$HOME/.local/bin"
 pip install ansible --break-system-packages
 
 ansible-galaxy install -r bootstraps/requirements.yml
