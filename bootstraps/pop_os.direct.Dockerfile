@@ -2,10 +2,7 @@
 FROM nycticoracs/pop_os:latest
 
 RUN apt-get update && \
-      apt-get -y install sudo python3-pip
-
-RUN pip install --no-cache-dir --upgrade pip \
-  && pip install --no-cache-dir ansible
+      apt-get -y install sudo ansible
 
 RUN export PATH=$PATH:.local/bin
 

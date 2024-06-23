@@ -9,6 +9,7 @@
   become: true
   apt:
     name:
+      - tmuxp
       - tmux
       - ripgrep
       - fd-find
@@ -27,6 +28,11 @@
     # update_cache: yes
     # cache_valid_time: 86400 #One day
   when: ansible_distribution == "Pop!_OS" or ansible_distribution == "Ubuntu"
+
+# Check that this works or figure out later
+- name: Sets default shell to zsh
+  become: true
+  command: chsh -s /usr/bin/zsh
 
 - name: Remove default .zshrc
   file:
@@ -51,3 +57,29 @@
 
 - name: Install golang
   import_tasks: golang.yml
+
+# https://github.com/tmux-plugins/tpm/blob/master/docs/automatic_tpm_installation.md
+- name: Make TPM Directory
+  file:
+    path: "{{ dotfiles }}/configs/tmux/.config/tmux/plugins/tpm"
+    state: directory
+
+- name: Install TMUX Plugin Manager
+  git:
+    repo: 'https://github.com/romkatv/tmux-plugins/tpm'
+    dest: '{{ home }}/.dotfiles/configs/tmux/.config/tmux/plugins/tpm'
+    depth: 1
+
+- name: Install TPM Plugins
+  args:
+    chdir: "{{ dotfiles }}/configs/tmux/.config/tmux/plugins/tpm/bin"
+  shell: './install_plugins'
+
+- name: Symlink TMUX Git Status statusline
+  file:
+    src: "{{ dotfiles }}/configs/tmux/.config/tmux/git_status.sh"
+    dest: "{{ dotfiles }}/configs/tmux/.config/tmux/plugins/tmux/custom/"
+    state: link
+
+- name: Install conda
+  import_tasks: conda.yml
