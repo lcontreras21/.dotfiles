@@ -23,4 +23,8 @@
     - To install conda
         - https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
     * Installing dotfiles
-        * Clone dotfiles repo TODO: fix nvim submodule not cloning properly
+        * Clone dotfiles repo
+
+- Things to get ansible todo:
+    - FONTS: Use desired NerdFont by placing it into ~/.local/share/fonts and activating it in the settings page
+
