@@ -10,17 +10,15 @@ RUN pip install --no-cache-dir --upgrade pip \
 RUN export PATH=$PATH:.local/bin
 
 # Create temp user
-RUN useradd -ms /bin/bash lcontreras21
-RUN usermod -aG sudo lcontreras21
+RUN useradd -ms /bin/bash lcontreras
+RUN usermod -aG sudo lcontreras
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN echo 'lcontreras21:lcontreras21' | chpasswd
+RUN echo 'lcontreras:lcontreras' | chpasswd
 
-USER lcontreras21
+USER lcontreras
 
-COPY download.sh download.sh
-COPY install install
-WORKDIR .
+COPY bootstrap.sh bootstrap.sh
+WORKDIR /home/lcontreras
 
-RUN ./download.sh
-
+RUN ./bootstrap.sh

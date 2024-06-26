@@ -17,4 +17,4 @@ ansible-galaxy install -r bootstraps/requirements.yml
 # TODO: Use ask-become pass command on Prod or use some sort of test env
 # ansible-playbook bootstraps/bootstrap.yml --ask-become-pass
 
-ansible-playbook bootstraps/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras21"
+ansible-playbook bootstraps/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras"

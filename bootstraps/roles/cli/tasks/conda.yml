@@ -10,7 +10,7 @@
       file:
         path: /opt/miniconda3
         state: directory
-        owner: ubuntu
+        owner: "{{ username }}"
         mode: 755
         recurse: yes
     - name: Run the installer

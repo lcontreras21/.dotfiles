@@ -9,22 +9,22 @@ RUN apt-get update && \
 RUN export PATH=$PATH:.local/bin
 
 # Create temp user
-RUN useradd -ms /bin/bash lcontreras21
-RUN usermod -aG sudo lcontreras21
+RUN useradd -ms /bin/bash lcontreras
+RUN usermod -aG sudo lcontreras
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN echo 'lcontreras21:lcontreras21' | chpasswd
+RUN echo 'lcontreras:lcontreras' | chpasswd
 
-USER lcontreras21
+USER lcontreras
 
-WORKDIR /home/lcontreras21/
+WORKDIR /home/lcontreras/
 
 COPY bootstrap.sh bootstrap.sh
 
 RUN ./bootstrap.sh
 
 # FOR DEBUGGING:
-# COPY . /home/lcontreras21/.dotfiles
-# WORKDIR  /home/lcontreras21/.dotfiles
+# COPY . /home/lcontreras/.dotfiles
+# WORKDIR  /home/lcontreras/.dotfiles
 
 # RUN ./install

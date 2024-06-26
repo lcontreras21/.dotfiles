@@ -58,28 +58,5 @@
 - name: Install golang
   import_tasks: golang.yml
 
-# https://github.com/tmux-plugins/tpm/blob/master/docs/automatic_tpm_installation.md
-- name: Make TPM Directory
-  file:
-    path: "{{ dotfiles }}/configs/tmux/.config/tmux/plugins/tpm"
-    state: directory
-
-- name: Install TMUX Plugin Manager
-  git:
-    repo: 'https://github.com/romkatv/tmux-plugins/tpm'
-    dest: '{{ home }}/.dotfiles/configs/tmux/.config/tmux/plugins/tpm'
-    depth: 1
-
-- name: Install TPM Plugins
-  args:
-    chdir: "{{ dotfiles }}/configs/tmux/.config/tmux/plugins/tpm/bin"
-  shell: './install_plugins'
-
-- name: Symlink TMUX Git Status statusline
-  file:
-    src: "{{ dotfiles }}/configs/tmux/.config/tmux/git_status.sh"
-    dest: "{{ dotfiles }}/configs/tmux/.config/tmux/plugins/tmux/custom/"
-    state: link
-
 - name: Install conda
   import_tasks: conda.yml

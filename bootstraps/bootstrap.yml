@@ -1,5 +1,4 @@
 ---
-# TODO: install node, golang
 - name: Bootstrap development environment
   hosts: localhost
   become: no
@@ -37,6 +36,11 @@
       tags: stow
       import_role:
         name: stow
+
+    - name: Install TMUX Plugin Manager
+      tags: tpm
+      import_role:
+        name: tmux
 
     - name: Neovim
       tags: nvim

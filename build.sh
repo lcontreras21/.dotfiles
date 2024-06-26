@@ -1,6 +1,6 @@
 #!/bin/bash
 
-choices=`echo "pop_os-dotfiles-direct pop_os-dotfiles-indirect ubuntu-dotfiles-indirect ubuntu-dotfiles-direct" | tr ' ' '\n'`
+choices=`echo "all pop_os-dotfiles-direct pop_os-dotfiles-indirect ubuntu-dotfiles-indirect ubuntu-dotfiles-direct" | tr ' ' '\n'`
 
 if [[ $# -eq 1 ]]; then
     selected=$1
@@ -13,4 +13,9 @@ if [[ -z $selected ]]; then
 fi
 
 echo $selected
-sudo docker compose -f bootstraps/docker-compose.yml up --build -d $selected 
+if [ $selected == "all" ]; then
+    sudo docker compose -f bootstraps/docker-compose.yml up --build
+else
+    sudo docker compose -f bootstraps/docker-compose.yml up --build -d $selected 
+fi
+

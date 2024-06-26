@@ -1,7 +1,8 @@
-username: "lcontreras21"
+# REPLACE THESE FOR A DIFFERENT USER
+username: "lcontreras"
 email: "luiscontrerasorendain@gmail.com"
 ssh_key_filename: "lcontreras_id_rsa"
-config: "{{ lookup('ansible.builtin.env', 'XDG_CONFIG') }}"
+config: "{{ lookup('ansible.builtin.env', 'XDG_CONFIG_HOME') }}"
 home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
 dotfiles: "{{ home }}/.dotfiles" 
 golang_version: "1.22.3"
