@@ -27,6 +27,15 @@
         scope: global
         value: "*"
 
+    - name: Create config directory if it does not exist
+      become: true
+      file:
+        owner: "{{ username }}" 
+        group: "{{ username }}" 
+        path: "{{ config }}"
+        state: directory
+        mode: '0755'
+
     - name: Command-line
       tags: cli
       import_role:
@@ -38,7 +47,7 @@
         name: stow
 
     - name: Install TMUX Plugin Manager
-      tags: tpm
+      tags: tmux 
       import_role:
         name: tmux
 

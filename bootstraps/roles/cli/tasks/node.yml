@@ -1,0 +1,34 @@
+- name: Create nvm directory if it does not exist
+  become: true
+  file:
+    owner: "{{ username }}" 
+    group: "{{ username }}" 
+    path: "{{ config }}/.nvm"
+    state: directory
+    mode: '0755'
+
+- name: Install nvm
+  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  args:
+    creates: "{{ config }}/.nvm/nvm.sh"
+  register: output
+
+- name: Print output 
+  debug:
+    msg: "TEst: {{ output.stdout }}"
+
+- name: Check base dir 
+  command: "ls {{ home }}" 
+  register:  baseDir
+
+- name: Print base dir 
+  debug:
+    msg: "Base: {{ baseDir.stdout }}"
+
+- name: Install node
+  shell: . {{ config }}/.nvm/nvm.sh && nvm install {{ item }}
+  args:
+    chdir: "{{ config }}"
+    creates: "{{ config }}/.nvm/versions/{{ item }}"
+  loop:
+    - 14.20.0

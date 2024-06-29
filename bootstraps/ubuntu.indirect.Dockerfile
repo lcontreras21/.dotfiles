@@ -2,11 +2,7 @@
 FROM ubuntu:noble
 
 RUN apt-get update && \
-      apt install -y software-properties-common && \
-      add-apt-repository -y --update ppa:ansible/ansible && \ 
-      apt install -y python3-pip git-all sudo wget
-
-RUN export PATH=$PATH:.local/bin
+      apt-get -y install sudo python3-pip git-all wget
 
 # Create temp user
 RUN useradd -ms /bin/bash lcontreras
@@ -17,14 +13,9 @@ RUN echo 'lcontreras:lcontreras' | chpasswd
 
 USER lcontreras
 
-WORKDIR /home/lcontreras/
-
+WORKDIR /home/lcontreras
 COPY bootstrap.sh bootstrap.sh
 
+ENV XDG_CONFIG_HOME=/home/lcontreras/.config
+
 RUN ./bootstrap.sh
-
-# FOR DEBUGGING:
-# COPY . /home/lcontreras/.dotfiles
-# WORKDIR  /home/lcontreras/.dotfiles
-
-# RUN ./install

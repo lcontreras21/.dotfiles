@@ -2,12 +2,7 @@
 FROM nycticoracs/pop_os:latest
 
 RUN apt-get update && \
-      apt-get -y install sudo python3-pip
-
-RUN pip install --no-cache-dir --upgrade pip \
-  && pip install --no-cache-dir ansible
-
-RUN export PATH=$PATH:.local/bin
+      apt-get -y install sudo python3-pip git-all wget
 
 # Create temp user
 RUN useradd -ms /bin/bash lcontreras
@@ -18,7 +13,9 @@ RUN echo 'lcontreras:lcontreras' | chpasswd
 
 USER lcontreras
 
-COPY bootstrap.sh bootstrap.sh
 WORKDIR /home/lcontreras
+COPY bootstrap.sh bootstrap.sh
+
+ENV XDG_CONFIG_HOME=/home/lcontreras/.config
 
 RUN ./bootstrap.sh

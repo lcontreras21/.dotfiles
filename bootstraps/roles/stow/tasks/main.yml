@@ -7,7 +7,7 @@
   loop:
     - .zshrc
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ item }}"
+    path: "{{ home }}/{{ item }}"
     state: absent
 
 - name: Delete Previous stowed folders
@@ -18,7 +18,7 @@
     - tmuxp
     - zsh
   args:
-    chdir: "/home/{{ username }}/.dotfiles/configs"
+    chdir: "{{ dotfiles }}/configs"
   shell: "stow -D {{ item }} -t {{ home }} --verbose=2"
   register: result
   changed_when: 'result.stderr is search("LINK: ")'

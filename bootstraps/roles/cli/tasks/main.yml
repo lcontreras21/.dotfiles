@@ -5,6 +5,12 @@
     state: directory
     mode: 0755
 
+- name: Update all packages to their latest version
+  become: true
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+
 - name: Install CLI tools in Debian-based distros
   become: true
   apt:
@@ -14,20 +20,14 @@
       - ripgrep
       - fd-find
       - jq
-      - htop
-      - python3-pip
-      - unzip
-      - xclip
-      - moreutils
       - fzf
       - zoxide
       - zsh
-      - npm
     state: present
-    # upgrade: yes
-    # update_cache: yes
-    # cache_valid_time: 86400 #One day
   when: ansible_distribution == "Pop!_OS" or ansible_distribution == "Ubuntu"
+
+- name: Installing Node
+  import_tasks: node.yml
 
 # Check that this works or figure out later
 - name: Sets default shell to zsh

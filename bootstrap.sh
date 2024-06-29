@@ -1,12 +1,12 @@
 #!/bin/bash
 cd $HOME 
 
-FOLDER=".dotfiles"
+DOTFILES=".dotfiles"
 REPO="https://github.com/lcontreras21/.dotfiles.git"
 
 # TODO: remove branch arg when merged in
-git clone -b ansible-izing --recurse-submodules ${REPO} ${FOLDER}
-cd ${FOLDER}
+git clone -b ansible-izing --recurse-submodules ${REPO} ${DOTFILES}
+cd "${HOME}/${DOTFILES}"
 
 set -e
 export PATH="$PATH:$HOME/.local/bin"

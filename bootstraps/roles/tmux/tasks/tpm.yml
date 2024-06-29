@@ -15,14 +15,6 @@
     dest: '{{ config }}/tmux/plugins/tpm'
     depth: 1
 
-- name: Check base dir 
-  command: "ls -ltr {{ config }}/tmux/plugins/tpm/bin"
-  register:  baseDir
-
-- name: Print base dir 
-  debug:
-    msg: "Base: {{ baseDir.stdout }}"
-
 - name: Install TPM Plugins
   args:
     chdir: "{{ config }}/tmux/plugins/tpm/bin"
