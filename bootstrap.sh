@@ -4,13 +4,16 @@ cd $HOME
 DOTFILES=".dotfiles"
 REPO="https://github.com/lcontreras21/.dotfiles.git"
 
-# TODO: remove branch arg when merged in
+# TODO: remove branch arg when on Prod
 git clone -b ansible-izing --recurse-submodules ${REPO} ${DOTFILES}
 cd "${HOME}/${DOTFILES}"
 
 set -e
 export PATH="$PATH:$HOME/.local/bin"
-pip install ansible --break-system-packages
+
+# Install ansible
+# --break-system-packages needed here for certain systems (cough ubuntu) that are more stingy with package managers
+PIP_BREAK_SYSTEM_PACKAGES=1 pip install ansible
 
 ansible-galaxy install -r bootstraps/requirements.yml
 
