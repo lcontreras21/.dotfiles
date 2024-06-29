@@ -1,18 +1,24 @@
 services:
+  # POP!_OS
   pop_os-dotfiles-direct:
     build:
       context: ../
-      dockerfile: bootstraps/pop_os.direct.Dockerfile
+      dockerfile: bootstraps/direct.Dockerfile
+      args:
+        IMAGE: nycticoracs/pop_os:latest 
     container_name: pop_os-dotfiles-direct
     user: lcontreras
     tty: true
     entrypoint: /bin/zsh
     environment:
       - TERM=xterm-256color
+
   pop_os-dotfiles-indirect:
     build:
       context: ../
-      dockerfile: bootstraps/pop_os.indirect.Dockerfile
+      dockerfile: bootstraps/indirect.Dockerfile
+      args:
+        IMAGE: nycticoracs/pop_os:latest 
     container_name: pop_os-dotfiles-indirect
     user: lcontreras
     tty: true
@@ -20,20 +26,26 @@ services:
     environment:
       - TERM=xterm-256color
 
+  # UBUNTU
   ubuntu-dotfiles-direct:
     build:
       context: ../
-      dockerfile: bootstraps/ubuntu.direct.Dockerfile
+      dockerfile: bootstraps/direct.Dockerfile
+      args:
+        IMAGE: ubuntu:latest
     container_name: ubuntu-dotfiles-direct
     user: lcontreras
     tty: true
     entrypoint: /bin/zsh
     environment:
       - TERM=xterm-256color
+
   ubuntu-dotfiles-indirect:
     build:
       context: ../
-      dockerfile: bootstraps/ubuntu.indirect.Dockerfile
+      dockerfile: bootstraps/indirect.Dockerfile
+      args:
+        IMAGE: ubuntu:latest
     container_name: ubuntu-dotfiles-indirect
     user: lcontreras
     tty: true

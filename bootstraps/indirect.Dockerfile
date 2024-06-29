@@ -1,5 +1,10 @@
 # syntax=docker/dockerfile:1
-FROM ubuntu:noble
+# Images:
+#   - ubuntu:noble
+#   - nycticoracs/pop_os:latest 
+
+ARG IMAGE=ubuntu:noble
+FROM ${IMAGE}
 
 RUN apt-get update && \
       apt-get -y install sudo python3-pip git-all wget

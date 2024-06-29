@@ -1,5 +1,10 @@
 # syntax=docker/dockerfile:1
-FROM nycticoracs/pop_os:latest
+# Images:
+#   - ubuntu:noble
+#   - nycticoracs/pop_os:latest 
+
+ARG IMAGE=ubuntu:noble
+FROM ${IMAGE}
 
 RUN apt-get update && \
       apt install -y software-properties-common && \
