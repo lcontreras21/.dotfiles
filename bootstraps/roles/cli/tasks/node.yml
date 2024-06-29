@@ -11,23 +11,13 @@
   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
   args:
     creates: "{{ config }}/.nvm/nvm.sh"
-  register: output
-
-- name: Print output 
-  debug:
-    msg: "TEst: {{ output.stdout }}"
-
-- name: Check base dir 
-  command: "ls {{ home }}" 
-  register:  baseDir
-
-- name: Print base dir 
-  debug:
-    msg: "Base: {{ baseDir.stdout }}"
 
 - name: Install node
-  shell: . {{ config }}/.nvm/nvm.sh && nvm install {{ item }}
+  become: false 
+  shell: >
+    . {{ config }}/nvm/nvm.sh && nvm install {{ item }}
   args:
+    executable: /bin/bash
     chdir: "{{ config }}"
     creates: "{{ config }}/.nvm/versions/{{ item }}"
   loop:

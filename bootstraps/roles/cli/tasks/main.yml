@@ -5,16 +5,11 @@
     state: directory
     mode: 0755
 
-- name: Update all packages to their latest version
-  become: true
-  ansible.builtin.apt:
-    name: "*"
-    state: latest
-
 - name: Install CLI tools in Debian-based distros
   become: true
   apt:
     name:
+      - curl
       - tmuxp
       - tmux
       - ripgrep
