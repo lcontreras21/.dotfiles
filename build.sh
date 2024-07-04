@@ -14,8 +14,8 @@ fi
 
 echo $selected
 if [ $selected == "all" ]; then
-    sudo docker compose -f bootstraps/docker-compose.yml up --build -d
+    sudo docker compose -f docker/docker-compose.yml up --build -d
 else
-    sudo docker compose -f bootstraps/docker-compose.yml up --build -d $selected 
+    sudo docker compose -f docker/docker-compose.yml up --build -d $selected 
 fi
 

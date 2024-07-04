@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo docker compose -f bootstraps/docker-compose.yml down
+sudo docker compose -f docker/docker-compose.yml down

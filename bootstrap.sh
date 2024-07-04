@@ -15,9 +15,9 @@ export PATH="$PATH:$HOME/.local/bin"
 # --break-system-packages needed here for certain systems (cough ubuntu) that are more stingy with package managers
 PIP_BREAK_SYSTEM_PACKAGES=1 pip install ansible
 
-ansible-galaxy install -r bootstraps/requirements.yml
+ansible-galaxy install -r docker/requirements.yml
 
 # TODO: Use ask-become pass command on Prod or use some sort of test env
-# ansible-playbook bootstraps/bootstrap.yml --ask-become-pass
+# ansible-playbook docker/bootstrap.yml --ask-become-pass
 
-ansible-playbook bootstraps/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras"
+ansible-playbook docker/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras"

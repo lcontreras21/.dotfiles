@@ -75,11 +75,11 @@ git clone --recurse-submodules https://github.com/lcontreras21/.dotfiles.git .do
 ```
 sudo apt install ansible  // if Using apt
 pip install ansible       // if using pip
-ansible-galaxy install -r bootstraps/requirements.yml
+ansible-galaxy install -r docker/requirements.yml
 ```
 3. Run ansible playbook
 ```
-ansible-playbook bootstraps/bootstrap.yml --ask-become-pass
+ansible-playbook docker/bootstrap.yml --ask-become-pass
 ```
 
 ### Testing

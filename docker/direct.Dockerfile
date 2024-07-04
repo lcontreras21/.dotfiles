@@ -25,9 +25,9 @@ RUN chown -R lcontreras:lcontreras /home/lcontreras/.dotfiles
 
 USER lcontreras
 
-RUN ansible-galaxy install -r bootstraps/requirements.yml
+RUN ansible-galaxy install -r docker/requirements.yml
 
 ENV XDG_CONFIG_HOME=/home/lcontreras/.config
 
 # Bootstrap environment for newuser
-RUN ansible-playbook bootstraps/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras"
+RUN ansible-playbook docker/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras"

@@ -3,7 +3,7 @@ services:
   pop_os-dotfiles-direct:
     build:
       context: ../
-      dockerfile: bootstraps/direct.Dockerfile
+      dockerfile: docker/direct.Dockerfile
       args:
         IMAGE: nycticoracs/pop_os:latest 
     container_name: pop_os-dotfiles-direct
@@ -16,7 +16,7 @@ services:
   pop_os-dotfiles-indirect:
     build:
       context: ../
-      dockerfile: bootstraps/indirect.Dockerfile
+      dockerfile: docker/indirect.Dockerfile
       args:
         IMAGE: nycticoracs/pop_os:latest 
     container_name: pop_os-dotfiles-indirect
@@ -30,7 +30,7 @@ services:
   ubuntu-dotfiles-direct:
     build:
       context: ../
-      dockerfile: bootstraps/direct.Dockerfile
+      dockerfile: docker/direct.Dockerfile
       args:
         IMAGE: ubuntu:latest
     container_name: ubuntu-dotfiles-direct
@@ -43,7 +43,7 @@ services:
   ubuntu-dotfiles-indirect:
     build:
       context: ../
-      dockerfile: bootstraps/indirect.Dockerfile
+      dockerfile: docker/indirect.Dockerfile
       args:
         IMAGE: ubuntu:latest
     container_name: ubuntu-dotfiles-indirect
