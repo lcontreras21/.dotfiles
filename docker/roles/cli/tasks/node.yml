@@ -15,7 +15,7 @@
 - name: Install node
   become: false 
   shell: >
-    . {{ config }}/nvm/nvm.sh && nvm install {{ item }}
+    . nvm/nvm.sh && nvm install {{ item }}
   args:
     executable: /bin/bash
     chdir: "{{ config }}"

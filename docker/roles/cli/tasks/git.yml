@@ -55,7 +55,7 @@
   community.general.git_config:
     name: fetch.prune 
     scope: global
-    value: "prune"
+    value: "true"
 
 # CREDENTIALS
 - name: Credential - store

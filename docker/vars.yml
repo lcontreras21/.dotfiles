@@ -1,9 +1,10 @@
 # ENV Variables
-username: "{{ lookup('ansible.builtin.env', 'USER') }}"
+username: "{{ ansible_user_id }}"
 git_username: "lcontreras21"
-email: "luiscontrerasorendain@gmail.com"
+git_email: "luiscontrerasorendain@gmail.com"
 home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
-config: "{{ lookup('ansible.builtin.env', 'XDG_CONFIG_HOME') | default({{ home }}/.config)}}"
+default_config: default(home) + '/.config'
+config: "{{ lookup('ansible.builtin.env', 'XDG_CONFIG_HOME') | default(default_config) }}"
 dotfiles: "{{ home }}/.dotfiles" 
 
 # Package Versions
