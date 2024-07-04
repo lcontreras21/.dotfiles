@@ -1,0 +1,11 @@
+# ENV Variables
+username: "{{ lookup('ansible.builtin.env', 'USER') }}"
+git_username: "lcontreras21"
+email: "luiscontrerasorendain@gmail.com"
+home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+config: "{{ lookup('ansible.builtin.env', 'XDG_CONFIG_HOME') | default({{ home }}/.config)}}"
+dotfiles: "{{ home }}/.dotfiles" 
+
+# Package Versions
+golang_version: "1.22.3"
+nodejs_version: "14.x"

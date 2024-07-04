@@ -1,4 +1,8 @@
 ---
+- name: Set Global Git Config 
+  become_user: "{{ username }}"
+  import_tasks: git.yml
+
 - name: Create directory ~/.local/bin/
   file:
     path: "{{ ansible_env.HOME }}/.local/bin"
