@@ -11,12 +11,14 @@
     state: absent
 
 - name: Delete Previous stowed folders
+  # TODO: make this loop for all folders in configs directory
   loop:
     - bin
     - nvim
     - tmux
     - tmuxp
     - zsh
+    - fastfetch
   args:
     chdir: "{{ dotfiles }}/configs"
   shell: "stow -D {{ item }} -t {{ home }} --verbose=2"

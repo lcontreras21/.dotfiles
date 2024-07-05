@@ -22,6 +22,7 @@
       - fzf
       - zoxide
       - zsh
+      - fastfetch
     state: present
   when: ansible_distribution == "Pop!_OS" or ansible_distribution == "Ubuntu"
 
