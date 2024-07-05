@@ -47,7 +47,6 @@
 
 ### Prerequisites
 
-<!-- TODO: list requirements -->
 Have certain packages installed on your system
 
 Using apt
@@ -107,7 +106,7 @@ If containerization fails before or at the ansible phase, you can comment that p
 ## Roadmap
 
 - [ ] Create symlinks using Ansible instead of GNU Stow, to remove need for one more package
-- [ ] Allow kill script to pick specific containers, or all
+- [ ] Make sure it's flexible in what ansible is running
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -4,8 +4,7 @@ cd $HOME
 DOTFILES=".dotfiles"
 REPO="https://github.com/lcontreras21/.dotfiles.git"
 
-# TODO: remove branch arg when on Prod
-git clone -b ansible-izing --recurse-submodules ${REPO} ${DOTFILES}
+git clone --recurse-submodules ${REPO} ${DOTFILES}
 cd "${HOME}/${DOTFILES}"
 
 set -e
@@ -17,7 +16,14 @@ PIP_BREAK_SYSTEM_PACKAGES=1 pip install ansible
 
 ansible-galaxy install -r docker/requirements.yml
 
-# TODO: Use ask-become pass command on Prod or use some sort of test env
-# ansible-playbook docker/bootstrap.yml --ask-become-pass
+DEBUG=""
+if [[ $# -eq 1 ]]; then
+    DEBUG=$1
+fi
 
-ansible-playbook docker/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras"
+
+if [ "$DEBUG" = "debug" ]; then
+    ansible-playbook docker/bootstrap.yml --extra-vars "ansible_sudo_pass=lcontreras"
+else
+    ansible-playbook docker/bootstrap.yml --ask-become-pass
+fi

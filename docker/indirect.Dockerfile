@@ -23,4 +23,4 @@ COPY bootstrap.sh bootstrap.sh
 
 ENV XDG_CONFIG_HOME=/home/lcontreras/.config
 
-RUN ./bootstrap.sh
+RUN ./bootstrap.sh "debug"
