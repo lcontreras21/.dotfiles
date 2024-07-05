@@ -87,16 +87,16 @@ Testing involves launching a Docker container, execing into it, and making sure 
 
 Running the following command will prompt you with direct/indirect versions of Pop!_OS and Ubuntu. Selecting one will create the image and then create the container in detached mode.
 ```
-./bootstrap.sh
+./docker/build.sh [all|CONTAINER_NAME|optional]
 ```
 
 Access the container by running the following commnad. It will prompt for any containers that are up
 ```
-./exec.sh
+./docker/exec.sh [CONTAINER_NAME|optional]
 ```
 To spin down all of the containers, run
 ```
-./kill.sh
+./docker/kill.sh [CONTAINER_NAME|optional]
 ```
 
 If containerization fails before or at the ansible phase, you can comment that part out of the Dockerfile. Make sure to set the exec part of the docker compose of that container to use bash instead of zsh, and change the `sudo docker exec` command to use bash. Then debug as normal.
