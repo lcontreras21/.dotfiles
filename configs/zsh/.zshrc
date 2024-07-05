@@ -128,9 +128,3 @@ unset __conda_setup
 
 # Source everything else
 source ~/.zsh_profile
-
-# psql_status=$(service postgresql status)
-# if [[ $psql_status = *" down"* ]] && [[ $(date +%u) -lt 6 ]]; then
-#   echo "Starting PSQL"
-#   sudo service postgresql --full-restart
-# fi
