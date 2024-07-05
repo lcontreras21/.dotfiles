@@ -1,4 +1,4 @@
-nvim/.config/nvim/plugin/packer_compiled.lua
-tmux/.config/tmux/plugins/
-fastfetch/.config/fastfetch/[0-9].jsonc
-fastfetch/.config/fastfetch/[0-9][0-9].jsonc
+configs/nvim/.config/nvim/plugin/packer_compiled.lua
+configs/tmux/.config/tmux/plugins/
+configs/fastfetch/.config/fastfetch/[0-9].jsonc
+configs/fastfetch/.config/fastfetch/[0-9][0-9].jsonc

@@ -1,0 +1,8 @@
+---
+- name: Install Stow in Debian-based distros 
+  become_method: sudo
+  become: true
+  apt:
+    name:
+      - stow
+    state: present

@@ -1,17 +1,4 @@
-### TODO
-
-- Harpoon
-    - [ ] Figure out how to only using full path if it's a duplicate file name
-    - [ ] Add keybinding to harpoon item to the top of the list or move it to the top if already listed
-- Telescope
-    - [ ] Add keymap to bring up previous picker and search
-    - [ ] Add keymap to harpoon selected files instead of opening them
-    - [ ] Add keymap to open it in a split
-    - [ ] Add keymap to grep the current highlighted search
-- Install
-    - [x] Write up install/uninstall script using stow for dotfiles
-    - [ ] Write up install/uninstall script for all the packages in install steps?
-    - [ ] Use ansible to deploy/download everything like magic
+#### Manual Instal Steps
 - Install Steps
     - To install apt packages
         - sudo apt install fzf ripgrep tmuxp zsh stow
@@ -36,18 +23,8 @@
     - To install conda
         - https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
     * Installing dotfiles
-        * Clone dotfiles repo TODO: fix nvim submodule not cloning properly
+        * Clone dotfiles repo
 
-- tmux-cheat-sheat
-    - [ ] Add more tools and clean up
-    - just use more often rather than google
-- nvim
-    - [ ] Lualine: add Obsidian Vault
-    - 
+- Things to get ansible todo:
+    - FONTS: Use desired NerdFont by placing it into ~/.local/share/fonts and activating it in the settings page
 
-
-#### Things to add or change
-    - [ ] Better max line length indicator only on specific files such as Python
-    - [ ] Fix Lsp stuff for Python
-    - [x] Git gutter to show where I've modified, added, removed. Potentially have key mappings to undo those changes
-    - [x] Folding, need to either learn nvims way or find a package

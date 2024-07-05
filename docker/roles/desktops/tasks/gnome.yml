@@ -1,0 +1,31 @@
+---
+- name: Install psutil
+  become: true
+  pip:
+    name:
+      - psutil
+    state: present
+
+- name: Install dconf in Debian-based distros 
+  become: true
+  apt:
+    name:
+      - dconf-cli
+    state: present
+  when: ansible_distribution == "Pop!_OS" or ansible_distribution == "Ubuntu"
+
+- name: Show battery percentage
+  become: true
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/show-battery-percentage"
+    value: "true"
+
+- name: Show apps in current workspace only on Alt+Tab
+  community.general.dconf:
+    key: "/org/gnome/shell/app-switcher/current-workspace-only"
+    value: "true"
+
+- name: Download updates automatically with GNOME software
+  community.general.dconf:
+    key: "/org/gnome/software/download-updates"
+    value: "true"

@@ -1,0 +1,37 @@
+---
+- name: Create nvim directory if it does not exist
+  become: yes
+  ansible.builtin.file:
+    path: /bin/nvim
+    state: directory
+    mode: '0755'
+
+- name: Download nvim Appimage 
+  become: yes
+  ansible.builtin.get_url:
+    url: https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    dest: /bin/nvim/nvim.appimage
+    owner: "{{ username }}"
+    group: "{{ username }}" 
+    mode: u+x
+
+- name: Extract Appimage
+  become: yes
+  shell: ./nvim.appimage --appimage-extract
+  args:
+    chdir: /bin/nvim
+
+- name: Remove Appimage
+  become: yes
+  ansible.builtin.file:
+    path: /bin/nvim/nvim.appimage
+    state: absent 
+
+
+- name: Create Symbolic link for Nvim appimage
+  become: yes
+  ansible.builtin.file:
+    src: /bin/nvim/squashfs-root/AppRun
+    dest: /bin/nvim/nvim.appimage
+    state: link
+

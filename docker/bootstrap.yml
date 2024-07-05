@@ -1,0 +1,44 @@
+---
+- name: Bootstrap development environment
+  hosts: localhost
+  become: no
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Create config directory if it does not exist
+      become: true
+      file:
+        owner: "{{ username }}" 
+        group: "{{ username }}" 
+        path: "{{ config }}"
+        state: directory
+        mode: '0755'
+
+    - name: Command-line
+      tags: cli
+      import_role:
+        name: cli
+
+    - name: Stow
+      tags: stow
+      import_role:
+        name: stow
+
+    - name: Install TMUX Plugin Manager
+      tags: tmux 
+      import_role:
+        name: tmux
+
+    - name: Neovim
+      tags: nvim
+      import_role:
+        name: nvim
+
+    - name: Desktop
+      tags: desktop 
+      import_role:
+        name: desktops
+      when: >
+        (not 'CI' in ansible_env) and
+        (ansible_system is search("Linux")) and
+        (not ansible_kernel is search("microsoft"))
