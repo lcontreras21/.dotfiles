@@ -1,3 +1,4 @@
+configs/bin/.local/share/nvim/
 configs/nvim/.config/nvim/plugin/packer_compiled.lua
 configs/tmux/.config/tmux/plugins/
 configs/fastfetch/.config/fastfetch/[0-9].jsonc
