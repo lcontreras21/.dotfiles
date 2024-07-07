@@ -20,7 +20,7 @@
       - fd-find
       - jq
       - fzf
-      - zoxide
+      # - zoxide
       - zsh
       - fastfetch
     state: present

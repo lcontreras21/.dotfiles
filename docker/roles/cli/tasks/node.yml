@@ -1,24 +1,37 @@
-- name: Create nvm directory if it does not exist
-  become: true
-  file:
-    owner: "{{ username }}" 
-    group: "{{ username }}" 
-    path: "{{ config }}/.nvm"
-    state: directory
-    mode: '0755'
+- name: Install Node
+  block:
+    - name: Delete previous install
+      become: true
+      file:
+        path: "{{ config }}/.nvm"
+        state: absent
 
-- name: Install nvm
-  shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-  args:
-    creates: "{{ config }}/.nvm/nvm.sh"
-
-- name: Install node
-  become: false 
-  shell: >
-    . nvm/nvm.sh && nvm install {{ item }}
-  args:
-    executable: /bin/bash
-    chdir: "{{ config }}"
-    creates: "{{ config }}/.nvm/versions/{{ item }}"
-  loop:
-    - 14.20.0
+    - name: Create nvm directory if it does not exist
+      become: true
+      file:
+        owner: "{{ username }}" 
+        group: "{{ username }}" 
+        path: "{{ config }}/.nvm"
+        state: directory
+        mode: '0755'
+    - name: Download NVM installer
+      become: true
+      get_url:
+        url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh
+        dest: /tmp/install-nvm.sh
+        mode: 0550
+    - name: Run the installer
+      become: true
+      shell: /tmp/install-nvm.sh
+      args:
+        creates: "{{ config }}/.nvm/nvm.sh"
+    - name: Install node
+      become: false 
+      shell: >
+        . nvm/nvm.sh && nvm install {{ item }}
+      args:
+        executable: /bin/bash
+        chdir: "{{ config }}"
+        creates: "{{ config }}/.nvm/versions/{{ item }}"
+      loop:
+        - 14.20.0

@@ -14,6 +14,7 @@
         mode: 755
         recurse: yes
     - name: Run the installer
+      become: true
       shell: /tmp/install-miniconda.sh -b -u -p /opt/miniconda3
     - name: Remove the installer
       file:
