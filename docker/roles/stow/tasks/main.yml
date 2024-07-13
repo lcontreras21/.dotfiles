@@ -19,6 +19,7 @@
     - tmuxp
     - zsh
     - fastfetch
+    - kitty
   args:
     chdir: "{{ dotfiles }}/configs"
   shell: "stow -D {{ item }} -t {{ home }} --verbose=2"
@@ -33,6 +34,8 @@
     - tmux
     - tmuxp
     - zsh
+    - fastfetch
+    - kitty
   args:
     chdir: "{{ dotfiles }}/configs"
   shell: "stow {{ item }} -t {{ home }} --verbose=2"
