@@ -131,3 +131,4 @@ source ~/.zsh_profile
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+alias pwsh="/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe"
