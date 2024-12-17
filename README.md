@@ -104,9 +104,8 @@ If containerization fails before or at the ansible phase, you can comment that p
 
 <!-- ROADMAP -->
 ## Roadmap
-
-- [ ] Create symlinks using Ansible instead of GNU Stow, to remove need for one more package
-- [ ] Make sure it's flexible in what ansible is running
+- [ ] Quit using ansible
+- [ ] Create bash scripts instead
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -20,43 +20,24 @@
       - fd-find
       - jq
       - fzf
-      # - zoxide
       - zsh
       - fastfetch
+      - stow
     state: present
   when: ansible_distribution == "Pop!_OS" or ansible_distribution == "Ubuntu"
 
 - name: Installing Node
   import_tasks: node.yml
+  when: "force_install"
 
-# Check that this works or figure out later
-- name: Sets default shell to zsh
-  become: true
-  command: chsh -s /usr/bin/zsh
-
-- name: Remove default .zshrc
-  file:
-    path: "{{ home }}/.zshrc"
-    state: absent
-
-- name: Download Oh My Zsh installation script
-  get_url:
-    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    dest: /tmp/install_ohmyzsh.sh
-
-- name: Run Oh My Zsh installation script
-  command: sh /tmp/install_ohmyzsh.sh --unattended
-  register: ohmyzsh_result
-  failed_when: "'FAILED' in ohmyzsh_result.stderr"
-
-- name: Install powerlevel10k in Debian-based distros 
-  git:
-    repo: 'https://github.com/romkatv/powerlevel10k.git'
-    dest: '{{ home }}/.oh-my-zsh/custom/themes/powerlevel10k'
-    depth: 1
+- name: Installing ZSH 
+  import_tasks: zsh.yml
+  when: "force_install"
 
 - name: Install golang
   import_tasks: golang.yml
+  when: "force_install"
 
 - name: Install conda
   import_tasks: conda.yml
+  when: "force_install"

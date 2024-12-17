@@ -31,7 +31,7 @@ alias vi='/bin/nvim/nvim.appimage'
 
 # GOLANG
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/go:~/Repos/AdventOfCode/2023
+export GOPATH=$HOME/go:~/Repos/AdventOfCode
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # DOTFILES

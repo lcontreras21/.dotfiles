@@ -6,6 +6,20 @@
     state: directory
     mode: '0755'
 
+- name: Remove Existing install dir 
+  become: yes
+  ansible.builtin.file:
+    state: absent 
+    path: /bin/nvim/squashfs-root
+  when: "force_install" 
+
+- name: Remove 
+  become: yes
+  ansible.builtin.file:
+    path: /bin/nvim/nvim.appimage
+    state: absent 
+  when: "force_install" 
+
 - name: Download nvim Appimage 
   become: yes
   ansible.builtin.get_url:
@@ -14,18 +28,21 @@
     owner: "{{ username }}"
     group: "{{ username }}" 
     mode: u+x
+  when: "force_install"
 
 - name: Extract Appimage
   become: yes
   shell: ./nvim.appimage --appimage-extract
   args:
     chdir: /bin/nvim
+  when: "force_install"
 
 - name: Remove Appimage
   become: yes
   ansible.builtin.file:
-    path: /bin/nvim/nvim.appimage
     state: absent 
+    path: /bin/nvim/nvim.appimage
+  when: "force_install"
 
 
 - name: Create Symbolic link for Nvim appimage
@@ -34,4 +51,3 @@
     src: /bin/nvim/squashfs-root/AppRun
     dest: /bin/nvim/nvim.appimage
     state: link
-

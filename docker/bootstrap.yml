@@ -23,6 +23,7 @@
       tags: stow
       import_role:
         name: stow
+      when: "force_install"
 
     - name: Install TMUX Plugin Manager
       tags: tmux 

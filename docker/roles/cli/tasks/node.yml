@@ -1,11 +1,10 @@
-- name: Install Node
+- name: Install ZSH 
   block:
-    - name: Delete previous install
+    - name: Delete previous node install
       become: true
       file:
         path: "{{ config }}/.nvm"
         state: absent
-
     - name: Create nvm directory if it does not exist
       become: true
       file:
