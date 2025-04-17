@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# tmuxp=`echo "AOC ASHP AWS BEAM CONFIG HERA" | tr ' ' '\n'`
+tmuxp=`ls ~/.config/tmuxp | sed -r 's/(\w*)\.yaml/\1/'`
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=`printf "$tmuxp" | fzf`
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+tmux_running=$(pgrep tmux)
+
+if tmux has-session -t=$selected 2> /dev/null; then
+    tmux attach -t $selected
+else
+    tmuxp load -d $selected
+fi
+
+tmux switch-client -t $selected

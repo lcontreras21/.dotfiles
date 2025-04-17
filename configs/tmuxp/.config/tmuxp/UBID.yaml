@@ -1,0 +1,14 @@
+session_name: UBID 
+start_directory: ~/ClearlyEnergy/MASS-UBID
+environment:
+  DJANGO_SETTINGS_MODULE: config.settings.dev
+shell_command_before: "conda activate UBID"
+windows:
+  - window_name: Django
+    panes:
+      - shell_command:
+        - ./bin/start-ubid.sh 
+  - window_name: UBID 
+    panes:
+      - shell_command:
+        - vim .
