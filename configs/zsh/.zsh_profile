@@ -26,13 +26,12 @@ export LIBGL_ALWAYS_INDIRECT=1
 
 # NEOVIM 
 PATH="$HOME/.local/bin:$PATH"
-alias vim='/bin/nvim/nvim.appimage'
-alias vi='/bin/nvim/nvim.appimage'
+alias vim='nvim'
 
 # GOLANG
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/go:~/Repos/AdventOfCode
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOPATH=$HOME/go/bin:~/Repos/AdventOfCode
+export PATH=$GOPATH:$GOROOT/bin:$PATH
 
 # DOTFILES
 export DOTFILES=$HOME/.dotfiles
