@@ -30,8 +30,8 @@ alias vim='nvim'
 
 # GOLANG
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/go/bin:~/Repos/AdventOfCode
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export GOPATH=$HOME/go/bin:$HOME/go/bin/bin:~/Repos/AdventOfCode
+export PATH=$GOPATH:$GOROOT/bin:$PATH
 
 # DOTFILES
 export DOTFILES=$HOME/.dotfiles
