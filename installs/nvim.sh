@@ -12,6 +12,6 @@ sudo apt -y install cmake gettext
 
 cd $nvim_dir
 
-make clean
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
+sudo make distclean
+sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
+make install
