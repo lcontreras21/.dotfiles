@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 
+switch_to() {
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $1
+    else
+        tmux switch-client -t $1
+    fi
+}
+
+
+
 # tmuxp=`echo "AOC ASHP AWS BEAM CONFIG HERA" | tr ' ' '\n'`
 tmuxp=`ls ~/.config/tmuxp | sed -r 's/(\w*)\.yaml/\1/'`
-tmuxp_manual=`find ~/ClearlyEnergy ~/repos -maxdepth 2 -type f -name ".tmuxp.yaml"`
+tmuxp_manual=`find ~/ClearlyEnergy ~/repos ~/Repos -maxdepth 2 -type f -name ".tmuxp.yaml"`
 
 tmuxp_choices="$tmuxp\n$tmuxp_manual"
 
@@ -16,19 +26,21 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-tmux_running=$(pgrep tmux)
-
-
+# echo $selected
 session_name=$selected
-if [[ $selected == *"${tmuxp_manual}"* ]]; then
-    session_name=$(basename $(dirname ${selected}))
+if [[ $tmuxp_manual == *"${selected}"* ]]; then
+    potential_session_name=$(basename $(dirname ${selected}))
+    if [[ $potential_session_name != "." ]]; then
+        session_name=$potential_session_name
+    fi
 fi
 
-
-if tmux has-session -t=$selected 2> /dev/null; then
-    tmux attach -t $selected
+if tmux has-session -t=$session_name 2> /dev/null; then
+    switch_to $session_name
 else
     tmuxp load -d $selected
+    while ! tmux has-session -t=$session_name 2>/dev/null; do
+        sleep 0.2
+    done
+    switch_to $session_name
 fi
-
-tmux switch-client -t $session_name
