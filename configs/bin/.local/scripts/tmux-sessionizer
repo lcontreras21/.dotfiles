@@ -1,23 +1,36 @@
 #!/usr/bin/env bash
+switch_to() {
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t $1
+    else
+        tmux switch-client -t $1
+    fi
+}
 
-tmuxp=`echo "AOC ASHP AWS BEAM CONFIG HERA" | tr ' ' '\n'`
+has_session() {
+    tmux list-sessions | grep -q "^$1:"
+}
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=`printf "$tmuxp" | fzf`
+    selected=$(find ~/ ~/Repos ~/.config ~/ClearlyEnergy ~/.dotfiles/configs -mindepth 1 -maxdepth 1 -type d,l | fzf)
 fi
 
 if [[ -z $selected ]]; then
     exit 0
 fi
 
+selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
-if tmux has-session -t=$selected 2> /dev/null; then
-    tmux attach -t $selected
-else
-    tmuxp load -d $selected
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
 fi
 
-tmux switch-client -t $selected
+if ! has_session $selected_name; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+switch_to $selected_name

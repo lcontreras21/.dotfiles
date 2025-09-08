@@ -1,0 +1,14 @@
+session_name: ORG-ASHP
+start_directory: ~/ClearlyEnergy/org-neep-ashp
+environment:
+  DJANGO_SETTINGS_MODULE: ashp.local_untracked
+shell_command_before: "conda activate ASHP"
+windows:
+  - window_name: Django Server
+    panes:
+      - shell_command:
+        - ./bin/start-ashp.sh 
+  - window_name: Terminal
+    panes:
+      - shell_command:
+        - vim .

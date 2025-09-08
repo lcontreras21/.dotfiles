@@ -132,3 +132,34 @@ source ~/.zsh_profile
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 alias pwsh="/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe"
+# export TERM='xterm-256color'
+
+
+# CLI colorful timer by bashbunni https://www.youtube.com/watch?v=GfQjJBtO-8Y
+# install lolcat speech-dispatcher from apt
+# install timer from https://github.com/caarlos0/timer
+
+declare -A pomo_options
+pomo_options["work"]="45"
+pomo_options["break"]="10"
+
+pomodoro () {
+    if [ -n "$1" -a -n "${pomo_options["$1"]}" ]; then
+        # Pre-set timers
+        val=$1
+        echo $val | lolcat
+        timer ${pomo_options["$val"]}m
+        spd-say "'$val' session done"
+    else
+        val="Timer for ${1} minute"
+        echo $val | lolcat
+        timer ${1}m
+        spd-say "session done"
+    fi
+}
+
+alias work="pomodoro 'work'"
+alias br="pomodoro 'break'"
+
+# opencode
+export PATH=/home/lcontreras/.opencode/bin:$PATH
