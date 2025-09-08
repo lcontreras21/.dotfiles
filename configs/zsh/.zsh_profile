@@ -27,6 +27,7 @@ export LIBGL_ALWAYS_INDIRECT=1
 # NEOVIM 
 PATH="$HOME/.local/bin:$PATH"
 alias vim='nvim'
+alias vi='nvim'
 
 # GOLANG
 export GOROOT=/usr/local/go
