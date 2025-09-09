@@ -2,7 +2,15 @@
 
 source ./env.sh
 
-sudo -A apt install -y stow
+if command -v apt &> /dev/null; then
+    echo "Using apt package manager."
+    sudo -A apt install -y stow
+elif command -v pacman &> /dev/null; then
+    echo "Using pacman package manager."
+    sudo pacman -Sy stow
+else
+    echo "Neither apt nor pacman found. Unknown package manager."
+fi
 
 files_to_remove=(".zshrc")
 

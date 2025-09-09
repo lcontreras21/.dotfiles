@@ -163,3 +163,10 @@ alias br="pomodoro 'break'"
 
 # opencode
 export PATH=/home/lcontreras/.opencode/bin:$PATH
+
+# bun completions
+[ -s "/home/lcontreras/.bun/_bun" ] && source "/home/lcontreras/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

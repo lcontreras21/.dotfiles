@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ "$XDG_CURRENT_DESKTOP" ~= *"GNOME"* ]]; then
+    return
+fi
+
 sudo -A apt install -y dconf-cli
 
 # NOTE: for WSL2 need to have an X-Server running like 'VcXsrv'

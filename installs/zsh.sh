@@ -1,6 +1,14 @@
 #!/bin/bash
 
-sudo -A apt install -y zsh
+if command -v apt &> /dev/null; then
+    echo "Using apt package manager."
+    sudo -A apt install -y zsh
+elif command -v pacman &> /dev/null; then
+    echo "Using pacman package manager."
+    sudo pacman -Sy install zsh
+else
+    echo "Neither apt nor pacman found. Unknown package manager."
+fi
 
 # Download the Oh My Zsh installation script
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O /tmp/install_ohmyzsh.sh
