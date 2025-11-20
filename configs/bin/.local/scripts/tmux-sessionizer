@@ -59,6 +59,7 @@ log() {
         echo "$*" >> "$TS_LOG_FILE"
     fi
 }
+log ""
 
 session_idx=""
 session_cmd=""
@@ -231,21 +232,33 @@ fi
 
 # utility function to find directories
 find_dirs() {
+    current_session=""
+    current_path=""
+    all_session_paths=()
+    all_tmuxp_paths=()
+
     # list TMUX sessions
     if [[ -n "${TMUX}" ]]; then
         current_session=$(tmux display-message -p '#S')
-        tmux list-sessions -F "[TMUX] #{session_name}" 2>/dev/null | grep -vFx "[TMUX] $current_session"
-    else
-        tmux list-sessions -F "[TMUX] #{session_name}" 2>/dev/null
+        current_path=$(tmux display-message -p -t "$current_session" '#{session_path}')
     fi
+
+    while IFS= read -r path; do
+        all_session_paths+=("$path")
+    done < <(tmux list-sessions -F '#{session_path}' 2>/dev/null)
+
+    tmux list-sessions -F "[TMUX] #{session_name}" 2>/dev/null | grep -vFx "[TMUX] $current_session"
 
     # list global TMUXP sessions
     tmuxp=`ls $HOME/.config/tmuxp | sed -r 's/(\w*)\.yaml/[TMUXP] \1/'`
     echo -e "$tmuxp"
 
     # list local TMUXP sessions
-    # TODO: change to use find framework
-    find ~/ClearlyEnergy ~/repos ~/Repos -maxdepth 2 -type f -name ".tmuxp.yaml" | sed 's/.*/[TMUXP] &/'
+    # TODO: remove duplicates from big search
+    while IFS= read -r path; do
+        all_tmuxp_paths+=("$(dirname $path)")
+    done < <(find ~/ClearlyEnergy ~/repos ~/Repos -maxdepth 2 -type f -name ".tmuxp.yaml")
+    printf '[TMUXP] %s\n' "${all_tmuxp_paths[@]}"
 
     # note: TS_SEARCH_PATHS is an array of paths to search for directories
     # if the path ends with :number, it will search for directories with a max depth of number ;)
@@ -259,7 +272,18 @@ find_dirs() {
             path="$entry"
         fi
 
-        [[ -d "$path" ]] && find "$path" -mindepth 1 -maxdepth "${depth:-${TS_MAX_DEPTH:-1}}" -path '*/.git' -prune -o -type d -print
+        if [[ -d "$path" ]]; then
+            find "$path" \
+                 -mindepth 1 \
+                 -maxdepth "${depth:-${TS_MAX_DEPTH:-1}}" \
+                 -path '*/.git' \
+                 -prune \
+                 -o \
+                 -type d \
+                 -print \
+            | grep -vFx -f <(printf "%s\n" "${all_session_paths[@]}") \
+            | grep -vFx -f <(printf "%s\n" "${all_tmuxp_paths[@]}")
+        fi
     done
 }
 
@@ -320,8 +344,11 @@ handle_split_session_cmd() {
             split_flag="-v"  # vertical layout (horizontal split)
         fi
 
-        log "creating new split: tmux split-window $split_flag -c $(pwd) $session_cmd"
-        local new_pane_id=$(tmux split-window $split_flag -c "$(pwd)" -P -F "#{pane_id}" "$session_cmd")
+        local session_name=$(tmux display-message -p "#{session_name}")
+        local window_number=$(tmux display-message -p "#{window_index}")
+        log "creating new split: tmux split-window -t "${session_name}:${window_number}" $split_flag -c $(pwd) $session_cmd"
+        # -P -F control the output of the tmux command
+        local new_pane_id=$(tmux split-window $split_flag -t "${session_name}:${window_number}" -c "$(pwd)" -P -F "#{pane_id}" "$session_cmd")
 
         if [[ -n "$new_pane_id" ]]; then
             set_pane_id "$session_idx" "$split_type" "$new_pane_id"
@@ -338,6 +365,7 @@ else
     selected=$(find_dirs | fzf)
 fi
 
+log "$selected"
 if [[ -z $selected ]]; then
     exit 0
 fi
@@ -353,10 +381,11 @@ fi
 
 if $is_tmuxp_session; then
     selected_name=$selected
-    if [[ $selected =~ ".tmuxp.yaml" ]]; then
+    if [ -d $selected ]; then
         log "truncating"
-        selected_name=$(basename $(dirname ${selected}))
+        selected_name=$(basename ${selected})
         selected_name=`echo "$selected_name" | tr '-' '_'`
+        selected="${selected}/.tmuxp.yaml"
     fi
 
     if ! has_session "$selected_name"; then
