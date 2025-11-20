@@ -118,7 +118,8 @@ if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
     if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
+        # . "/opt/miniconda3/etc/profile.d/conda.sh"
+        echo
     else
         export PATH="/opt/miniconda3/bin:$PATH"
     fi
@@ -170,3 +171,6 @@ export PATH=/home/lcontreras/.opencode/bin:$PATH
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Python Packages
+export PATH="$HOME/.local/bin:$PATH"

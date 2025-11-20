@@ -25,7 +25,6 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export LIBGL_ALWAYS_INDIRECT=1
 
 # NEOVIM 
-PATH="$HOME/.local/bin:$PATH"
 alias vim='nvim'
 alias vi='nvim'
 

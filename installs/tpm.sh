@@ -11,4 +11,5 @@ source ./env.sh
 git clone --depth 1 https://github.com/tmux-plugins/tpm "${config}/tmux/plugins/tpm"
 
 # Create symlink for git_status.sh
+[ -d ${config}/tmux/plugins/tmux/custom ] || mkdir ${config}/tmux/plugins/tmux/custom
 ln -sf "${config}/tmux/git_status.sh" "${config}/tmux/plugins/tmux/custom/git_status.sh"
