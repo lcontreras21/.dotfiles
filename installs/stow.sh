@@ -22,7 +22,7 @@ for file in "${files_to_remove[@]}"; do
 done
 
 # Function to delete previous stowed folders
-stow_folders=("bin" "nvim" "tmux" "tmuxp" "zsh" "fastfetch" "kitty")
+stow_folders=("bin" "git" "nvim" "tmux" "tmux-sessionizer" "zsh")
 
 # Loop over folders and delete stowed ones using stow
 for folder in "${stow_folders[@]}"; do
