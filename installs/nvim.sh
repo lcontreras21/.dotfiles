@@ -4,7 +4,7 @@
 nvim_dir=/usr/bin/nvim
 
 # neovim btw
-if [ -d $nvim_dir ]; then
+if [ -d $nvim_dir  || -f $nvim_dir ]; then
     rm -r $nvim_dir
 fi
 sudo git clone --depth 1 --branch stable https://github.com/neovim/neovim.git $nvim_dir
