@@ -6,7 +6,7 @@
 
 if command -v apt &> /dev/null; then
     apt-get update
-    apt-get install git
+    apt-get install -y git
 fi
 
 git clone https://github.com/lcontreras21/.dotfiles.git --depth 1 /tmp/.dotfiles
