@@ -2,7 +2,7 @@
 
 export git_username='lcontreras21'
 export git_email='luiscontrerasorendain@gmail.com'
-export golang_version='1.22.3'
+export golang_version='1.26.3'
 export username='lcontreras'
 export nvm_version='v0.39.7'
 export node_version='14.20.0'

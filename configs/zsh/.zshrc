@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/$(whoami)/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -78,7 +78,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git dotenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -118,8 +118,7 @@ if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
     if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        # . "/opt/miniconda3/etc/profile.d/conda.sh"
-        echo
+        . "/opt/miniconda3/etc/profile.d/conda.sh"
     else
         export PATH="/opt/miniconda3/bin:$PATH"
     fi
@@ -130,8 +129,11 @@ unset __conda_setup
 # Source everything else
 source ~/.zsh_profile
 
-# export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+init_nvm () {
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+}
+# init_nvm
 alias pwsh="/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe"
 # export TERM='xterm-256color'
 
@@ -174,3 +176,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Python Packages
 export PATH="$HOME/.local/bin:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+. "$HOME/.local/share/../bin/env"
