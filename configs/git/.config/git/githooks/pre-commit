@@ -1,0 +1,48 @@
+#!/bin/bash
+
+breakpoint_check=$(git diff --staged HEAD --no-ext-diff --unified=0 --exit-code -a --no-prefix | grep -E "^\+" | grep breakpoint)
+print_check=$(git diff --staged HEAD --no-ext-diff --unified=0 --exit-code -a --no-prefix | grep -E "^\+" | grep "print(")
+consolelog_check=$(git diff --staged HEAD --no-ext-diff --unified=0 --exit-code -a --no-prefix | grep -E "^\+" | grep 'console.log')
+localhost_check=$(git diff --staged HEAD --no-ext-diff --unified=0 --exit-code -a --no-prefix | grep -E "^\+" | grep wsl)
+
+errors=0
+
+if [ ! -z "${breakpoint_check}" ]
+then
+        echo "COMMIT REJECTED: commit contains code with break points. Please remove before committing."
+        exit 1
+        errors=$((errors + 1))
+# else
+#         echo "Code contains no break points"
+fi
+
+if [ ! -z "${print_check}" ]
+then
+        echo "COMMIT REJECTED: commit contains code with print statements. Please remove before committing."
+        errors=$((errors + 1))
+# else
+        # echo "Code contains no print statements"
+fi
+
+if [ ! -z "${consolelog_check}" ]
+then
+        echo "COMMIT REJECTED: commit contains code with console.log statements. Please remove before committing."
+        errors=$((errors + 1))
+# else
+        # echo "Code contains no print statements"
+fi
+
+if [ ! -z "${localhost_check}" ]
+then
+        echo "COMMIT REJECTED: commit contains code with wsl statements. Please remove before committing."
+        errors=$((errors + 1))
+# else
+        # echo "Code contains no print statements"
+fi
+
+if [ $errors != 0 ]
+then
+    exit 1
+fi
+
+exit 0

@@ -1,7 +1,0 @@
-session_name: AWS
-start_directory: ~/ClearlyEnergy/helix-aws-config
-windows:
-  - window_name: Terminal
-    panes:
-      - shell_command:
-        - vim .

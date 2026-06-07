@@ -1,0 +1,11 @@
+xkb_keymap {
+    xkb_keycodes { include "evdev+aliases(qwerty)" };
+    xkb_types { include "complete" };
+    xkb_compat { include "complete" };
+    xkb_symbols {
+        include "pc+us+inet(evdev)"
+        replace key <CAPS> { [ Control_L ] };  // Caps Lock acts as Left Control
+        replace key <LCTL> { [ VoidSymbol ] }; // Left Control does nothing
+    };
+    xkb_geometry { include "pc(pc105)" };
+};

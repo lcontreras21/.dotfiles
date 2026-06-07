@@ -220,7 +220,7 @@ cleanup_dead_panes() {
 sanity_check
 
 # if TS_SEARCH_PATHS is not set use default
-[[ -n "$TS_SEARCH_PATHS" ]] || TS_SEARCH_PATHS=(~/:1 ~/Repos ~/.config ~/ClearlyEnergy ~/.dotfiles/configs:3)
+[[ -n "$TS_SEARCH_PATHS" ]] || TS_SEARCH_PATHS=(~/:1 ~/Repos ~/.config ~/ClearlyEnergy ~/ClearlyEnergy/BEAM/src ~/.dotfiles/configs:3)
 
 # Add any extra search paths to the TS_SEARCH_PATHS array
 # e.g : EXTRA_SEARCH_PATHS=("$HOME/extra1:4" "$HOME/extra2")
@@ -257,7 +257,7 @@ find_dirs() {
     # TODO: remove duplicates from big search
     while IFS= read -r path; do
         all_tmuxp_paths+=("$(dirname $path)")
-    done < <(find ~/ClearlyEnergy ~/repos ~/Repos -maxdepth 2 -type f -name ".tmuxp.yaml")
+    done < <(find ~/ClearlyEnergy ~/Repos -maxdepth 2 -type f -name ".tmuxp.yaml")
     printf '[TMUXP] %s\n' "${all_tmuxp_paths[@]}"
 
     # note: TS_SEARCH_PATHS is an array of paths to search for directories
