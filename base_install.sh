@@ -6,7 +6,7 @@
 
 if command -v apt &> /dev/null; then
     apt-get update
-    apt-get install -y git
+    apt-get install -y git stow tmux
 fi
 
 git clone https://github.com/lcontreras21/.dotfiles.git --depth 1 /tmp/.dotfiles
@@ -17,6 +17,10 @@ if [ -d "~/.oh-my-zsh" ]; then
 fi
 
 ./install.sh zsh
-cp configs/zsh/.* ~/
+stow zsh -t $HOME --verbose=2 --dir="/tmp/.dotfiles/configs"
 
 ./install.sh nvim
+./install.sh tpm
+
+echo "Logout and Log back in to set shell to zsh"
+
