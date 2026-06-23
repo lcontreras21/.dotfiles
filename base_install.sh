@@ -17,6 +17,7 @@ if [ -d "~/.oh-my-zsh" ]; then
 fi
 
 ./install.sh zsh
+rm -r ~/.zshrc
 stow zsh -t $HOME --verbose=2 --dir="/tmp/.dotfiles/configs"
 
 ./install.sh nvim
