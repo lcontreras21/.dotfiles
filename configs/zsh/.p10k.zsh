@@ -46,7 +46,7 @@
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
-    # virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
+    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
     # pyenv                   # python environment (https://github.com/pyenv/pyenv)
     goenv                   # go environment (https://github.com/syndbg/goenv)
@@ -363,17 +363,17 @@
     if (( $1 )); then
       # Styling for up-to-date Git status.
       local       meta='%f'     # default foreground
-      local      clean='%76F'   # green foreground
-      local   modified='%178F'  # yellow foreground
-      local  untracked='%39F'   # blue foreground
-      local conflicted='%196F'  # red foreground
+      local      clean='%2F'   # green (theme slot 2)
+      local   modified='%11F'  # bright yellow (theme slot 11)
+      local  untracked='%12F'  # accent (theme slot 12)
+      local conflicted='%1F'   # red (theme slot 1)
     else
       # Styling for incomplete and stale Git status.
-      local       meta='%244F'  # grey foreground
-      local      clean='%244F'  # grey foreground
-      local   modified='%244F'  # grey foreground
-      local  untracked='%244F'  # grey foreground
-      local conflicted='%244F'  # grey foreground
+      local       meta='%13F'  # grey foreground
+      local      clean='%13F'  # grey foreground
+      local   modified='%13F'  # grey foreground
+      local  untracked='%13F'  # grey foreground
+      local conflicted='%13F'  # grey foreground
     fi
 
     local res
@@ -1475,7 +1475,7 @@
   #   P9K_IP_TX_BYTES_DELTA | number of bytes sent since last prompt
   #   P9K_IP_RX_RATE        | receive rate (since last prompt)
   #   P9K_IP_TX_RATE        | send rate (since last prompt)
-  typeset -g POWERLEVEL9K_IP_CONTENT_EXPANSION='$P9K_IP_IP${P9K_IP_RX_RATE:+ %70F⇣$P9K_IP_RX_RATE}${P9K_IP_TX_RATE:+ %215F⇡$P9K_IP_TX_RATE}'
+  typeset -g POWERLEVEL9K_IP_CONTENT_EXPANSION='$P9K_IP_IP${P9K_IP_RX_RATE:+ %2F⇣$P9K_IP_RX_RATE}${P9K_IP_TX_RATE:+ %3F⇡$P9K_IP_TX_RATE}'
   # Show information for the first network interface whose name matches this regular expression.
   # Run `ifconfig` or `ip -4 a show` to see the names of all network interfaces.
   typeset -g POWERLEVEL9K_IP_INTERFACE='[ew].*'
@@ -1608,5 +1608,110 @@
 # Tell `p10k configure` which file it should overwrite.
 typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
+
+# --- skwd-wall palette remap (hand-added; re-add this block if you re-run `p10k configure`) ---
+# Omarchy derives the terminal's 16 ANSI colors from the wallpaper palette and
+# hot-reloads them on every wallpaper change (alacritty watches
+# ~/.local/state/omarchy/current/theme/alacritty.toml). The wizard config used fixed
+# xterm-256 colors (>=16) that never change, so half the prompt stayed frozen.
+# Keeping every prompt color within 0..15 makes the whole prompt follow the wallpaper.
+typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_ASDF_DOTNET_CORE_FOREGROUND=12  # was 134
+typeset -g POWERLEVEL9K_ASDF_ELIXIR_FOREGROUND=12  # was 129
+typeset -g POWERLEVEL9K_ASDF_ERLANG_FOREGROUND=9  # was 125
+typeset -g POWERLEVEL9K_ASDF_FLUTTER_FOREGROUND=11  # was 38
+typeset -g POWERLEVEL9K_ASDF_FOREGROUND=8  # was 66
+typeset -g POWERLEVEL9K_ASDF_GOLANG_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_ASDF_HASKELL_FOREGROUND=8  # was 172
+typeset -g POWERLEVEL9K_ASDF_JAVA_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_ASDF_JULIA_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_ASDF_LUA_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_ASDF_NODEJS_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_ASDF_PERL_FOREGROUND=10  # was 67
+typeset -g POWERLEVEL9K_ASDF_PHP_FOREGROUND=13  # was 99
+typeset -g POWERLEVEL9K_ASDF_POSTGRES_FOREGROUND=8  # was 31
+typeset -g POWERLEVEL9K_ASDF_PYTHON_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_ASDF_RUBY_FOREGROUND=9  # was 168
+typeset -g POWERLEVEL9K_ASDF_RUST_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_AWS_DEFAULT_FOREGROUND=9  # was 208
+typeset -g POWERLEVEL9K_AWS_EB_ENV_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_AZURE_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=2  # was 70
+typeset -g POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=8  # was 178
+typeset -g POWERLEVEL9K_BATTERY_LOW_FOREGROUND=9  # was 160
+typeset -g POWERLEVEL9K_BATTERY_{CHARGING,CHARGED}_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=13  # was 180
+typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=3  # was 178
+typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=9  # was 180
+typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=3  # was 178
+typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=12  # was 39
+typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=13  # was 103
+typeset -g POWERLEVEL9K_DISK_USAGE_CRITICAL_FOREGROUND=9  # was 160
+typeset -g POWERLEVEL9K_DISK_USAGE_NORMAL_FOREGROUND=2  # was 35
+typeset -g POWERLEVEL9K_DISK_USAGE_WARNING_FOREGROUND=3  # was 220
+typeset -g POWERLEVEL9K_DOTNET_VERSION_FOREGROUND=12  # was 134
+typeset -g POWERLEVEL9K_FVM_FOREGROUND=11  # was 38
+typeset -g POWERLEVEL9K_GCLOUD_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_GOENV_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_GOOGLE_APP_CRED_DEFAULT_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_GO_VERSION_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_HASKELL_STACK_FOREGROUND=8  # was 172
+typeset -g POWERLEVEL9K_IP_FOREGROUND=11  # was 38
+typeset -g POWERLEVEL9K_JAVA_VERSION_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_JENV_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=12  # was 134
+typeset -g POWERLEVEL9K_LARAVEL_VERSION_FOREGROUND=9  # was 161
+typeset -g POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND=9  # was 166
+typeset -g POWERLEVEL9K_LOAD_NORMAL_FOREGROUND=2  # was 66
+typeset -g POWERLEVEL9K_LOAD_WARNING_FOREGROUND=3  # was 178
+typeset -g POWERLEVEL9K_LUAENV_FOREGROUND=11  # was 32
+typeset -g POWERLEVEL9K_MIDNIGHT_COMMANDER_FOREGROUND=8  # was 178
+typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND=13  # was 242
+typeset -g POWERLEVEL9K_NIX_SHELL_FOREGROUND=11  # was 74
+typeset -g POWERLEVEL9K_NNN_FOREGROUND=8  # was 72
+typeset -g POWERLEVEL9K_NODEENV_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_NODENV_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_NORDVPN_FOREGROUND=11  # was 39
+typeset -g POWERLEVEL9K_NVM_FOREGROUND=8  # was 70
+typeset -g POWERLEVEL9K_PACKAGE_FOREGROUND=3  # was 117
+typeset -g POWERLEVEL9K_PHPENV_FOREGROUND=13  # was 99
+typeset -g POWERLEVEL9K_PHP_VERSION_FOREGROUND=13  # was 99
+typeset -g POWERLEVEL9K_PLENV_FOREGROUND=10  # was 67
+typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=9  # was 196
+typeset -g POWERLEVEL9K_PROXY_FOREGROUND=11  # was 68
+typeset -g POWERLEVEL9K_PUBLIC_IP_FOREGROUND=8  # was 94
+typeset -g POWERLEVEL9K_PYENV_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_RAM_FOREGROUND=8  # was 66
+typeset -g POWERLEVEL9K_RANGER_FOREGROUND=8  # was 178
+typeset -g POWERLEVEL9K_RBENV_FOREGROUND=9  # was 168
+typeset -g POWERLEVEL9K_RULER_FOREGROUND=13  # was 242
+typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_RVM_FOREGROUND=9  # was 168
+typeset -g POWERLEVEL9K_SCALAENV_FOREGROUND=9  # was 160
+typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=9  # was 160
+typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND=9  # was 160
+typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND=9  # was 160
+typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=2  # was 70
+typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=2  # was 70
+typeset -g POWERLEVEL9K_SWAP_FOREGROUND=8  # was 96
+typeset -g POWERLEVEL9K_TASKWARRIOR_FOREGROUND=11  # was 74
+typeset -g POWERLEVEL9K_TERRAFORM_OTHER_FOREGROUND=11  # was 38
+typeset -g POWERLEVEL9K_TERRAFORM_VERSION_FOREGROUND=11  # was 38
+typeset -g POWERLEVEL9K_TIMEWARRIOR_FOREGROUND=10  # was 110
+typeset -g POWERLEVEL9K_TIME_FOREGROUND=8  # was 66
+typeset -g POWERLEVEL9K_TODO_FOREGROUND=10  # was 110
+typeset -g POWERLEVEL9K_TOOLBOX_FOREGROUND=8  # was 178
+typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=2  # was 76
+typeset -g POWERLEVEL9K_VCS_LOADING_VISUAL_IDENTIFIER_COLOR=13  # was 244
+typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=11  # was 178
+typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=12  # was 76
+typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_COLOR=2  # was 76
+typeset -g POWERLEVEL9K_VIM_SHELL_FOREGROUND=8  # was 34
+typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=11  # was 37
+typeset -g POWERLEVEL9K_VPN_IP_FOREGROUND=11  # was 81
+typeset -g POWERLEVEL9K_WIFI_FOREGROUND=11  # was 68
+typeset -g POWERLEVEL9K_XPLR_FOREGROUND=8  # was 72
+# --- end skwd-wall palette remap ---
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'

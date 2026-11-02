@@ -25,3 +25,5 @@ if [ ! -d "~/.config/nvim" ]; then
     cd ~/.config
     git clone --depth 1 https://github.com/lcontreras21/init.lua.git nvim
 fi
+
+sudo apt -y install tree-sitter-cli
